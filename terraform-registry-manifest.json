@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "metadata": {
+    "protocol_versions": ["6.0"],
+    "provider": {
+      "name": "euno",
+      "namespace": "euno-ai",
+      "source": "euno-ai/euno"
+    }
+  }
+}
