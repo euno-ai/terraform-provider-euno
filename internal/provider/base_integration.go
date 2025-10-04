@@ -16,16 +16,16 @@ import (
 
 // BaseIntegrationResourceModel contains the common fields for all integration resources
 type BaseIntegrationResourceModel struct {
-	ID                        types.Int64  `tfsdk:"id"`
-	Name                      types.String `tfsdk:"name"`
-	Active                    types.Bool   `tfsdk:"active"`
-	Schedule                  *ScheduleModel `tfsdk:"schedule"`
-	TriggerSecret             types.String `tfsdk:"trigger_secret"`
-	TriggerURL                types.String `tfsdk:"trigger_url"`
-	InvalidationStrategy      *InvalidationStrategyModel `tfsdk:"invalidation_strategy"`
-	PendingCredentialsLookupKey types.String `tfsdk:"pending_credentials_lookup_key"`
-	LastUpdatedAt             types.String `tfsdk:"last_updated_at"`
-	CreatedAt                 types.String `tfsdk:"created_at"`
+	ID                          types.Int64                `tfsdk:"id"`
+	Name                        types.String               `tfsdk:"name"`
+	Active                      types.Bool                 `tfsdk:"active"`
+	Schedule                    *ScheduleModel             `tfsdk:"schedule"`
+	TriggerSecret               types.String               `tfsdk:"trigger_secret"`
+	TriggerURL                  types.String               `tfsdk:"trigger_url"`
+	InvalidationStrategy        *InvalidationStrategyModel `tfsdk:"invalidation_strategy"`
+	PendingCredentialsLookupKey types.String               `tfsdk:"pending_credentials_lookup_key"`
+	LastUpdatedAt               types.String               `tfsdk:"last_updated_at"`
+	CreatedAt                   types.String               `tfsdk:"created_at"`
 }
 
 // ScheduleModel describes the schedule configuration
@@ -35,7 +35,6 @@ type ScheduleModel struct {
 	RepeatTime   types.String `tfsdk:"repeat_time"`
 	RepeatPeriod types.Int64  `tfsdk:"repeat_period"`
 }
-
 
 // InvalidationStrategyModel describes the invalidation strategy configuration
 type InvalidationStrategyModel struct {
@@ -68,7 +67,6 @@ func (r *BaseIntegrationResource) Configure(ctx context.Context, req resource.Co
 
 	r.client = client
 }
-
 
 // getCommonBlocks returns the common blocks for pull integration resources
 func getCommonBlocks() map[string]schema.Block {
@@ -231,7 +229,6 @@ func convertInvalidationStrategyFromAPI(apiStrategy *InvalidationStrategy) *Inva
 	return strategy
 }
 
-
 // ImportState imports the resource from the API.
 func (r *BaseIntegrationResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	// The import ID is just the integration ID since account_id is in the provider
@@ -294,4 +291,3 @@ func getCommonAttributes() map[string]schema.Attribute {
 		},
 	}
 }
-

@@ -96,11 +96,11 @@ func (r *FivetranIntegrationResource) Create(ctx context.Context, req resource.C
 
 	// Convert Terraform data to API format
 	integration := IntegrationIn{
-		IntegrationType: "fivetran",
-		Name:            data.Name.ValueString(),
-		Active:          data.Active.ValueBool(),
-		Configuration:   configMap,
-		Schedule:        convertScheduleToAPI(data.Schedule),
+		IntegrationType:      "fivetran",
+		Name:                 data.Name.ValueString(),
+		Active:               data.Active.ValueBool(),
+		Configuration:        configMap,
+		Schedule:             convertScheduleToAPI(data.Schedule),
 		InvalidationStrategy: convertInvalidationStrategyToAPI(data.InvalidationStrategy),
 	}
 
@@ -220,11 +220,11 @@ func (r *FivetranIntegrationResource) Update(ctx context.Context, req resource.U
 
 	// Convert Terraform data to API format
 	integration := IntegrationIn{
-		IntegrationType: "fivetran",
-		Name:            data.Name.ValueString(),
-		Active:          data.Active.ValueBool(),
-		Configuration:   configMap,
-		Schedule:        convertScheduleToAPI(data.Schedule),
+		IntegrationType:      "fivetran",
+		Name:                 data.Name.ValueString(),
+		Active:               data.Active.ValueBool(),
+		Configuration:        configMap,
+		Schedule:             convertScheduleToAPI(data.Schedule),
 		InvalidationStrategy: convertInvalidationStrategyToAPI(data.InvalidationStrategy),
 	}
 

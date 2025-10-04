@@ -12,11 +12,11 @@ import (
 
 // EunoClient represents the API client for Euno
 type EunoClient struct {
-	serverURL    string
-	apiKey       string
-	accountID    int
-	httpClient   *http.Client
-	rateLimiter  chan struct{}
+	serverURL   string
+	apiKey      string
+	accountID   int
+	httpClient  *http.Client
+	rateLimiter chan struct{}
 }
 
 // NewEunoClient creates a new Euno API client with rate limiting
@@ -47,10 +47,10 @@ func (c *EunoClient) releaseRateLimit() {
 
 // IntegrationSchedule represents the schedule configuration
 type IntegrationSchedule struct {
-	TimeZone    string   `json:"time_zone"`
-	RepeatOn    []string `json:"repeat_on,omitempty"`
-	RepeatTime  string   `json:"repeat_time,omitempty"`
-	RepeatPeriod *int    `json:"repeat_period,omitempty"`
+	TimeZone     string   `json:"time_zone"`
+	RepeatOn     []string `json:"repeat_on,omitempty"`
+	RepeatTime   string   `json:"repeat_time,omitempty"`
+	RepeatPeriod *int     `json:"repeat_period,omitempty"`
 }
 
 // InvalidationStrategy represents the invalidation strategy configuration
@@ -61,38 +61,38 @@ type InvalidationStrategy struct {
 
 // IntegrationIn represents the input for creating an integration
 type IntegrationIn struct {
-	IntegrationType string               `json:"integration_type"`
-	Name            string               `json:"name"`
-	Active          bool                 `json:"active"`
-	Schedule        *IntegrationSchedule `json:"schedule,omitempty"`
-	Configuration   map[string]interface{} `json:"configuration"`
-	InvalidationStrategy *InvalidationStrategy `json:"invalidation_strategy,omitempty"`
-	PendingCredentialsLookupKey *string  `json:"pending_credentials_lookup_key,omitempty"`
+	IntegrationType             string                 `json:"integration_type"`
+	Name                        string                 `json:"name"`
+	Active                      bool                   `json:"active"`
+	Schedule                    *IntegrationSchedule   `json:"schedule,omitempty"`
+	Configuration               map[string]interface{} `json:"configuration"`
+	InvalidationStrategy        *InvalidationStrategy  `json:"invalidation_strategy,omitempty"`
+	PendingCredentialsLookupKey *string                `json:"pending_credentials_lookup_key,omitempty"`
 }
 
 // IntegrationOut represents the output from the API
 type IntegrationOut struct {
-	ID                        int                    `json:"id"`
-	IntegrationType           string                 `json:"integration_type"`
-	AccountID                 int                    `json:"account_id"`
-	CreatedAt                 string                 `json:"created_at"`
-	CreatedBy                 string                 `json:"created_by"`
-	LastUpdatedAt             string                 `json:"last_updated_at"`
-	LastUpdatedBy             string                 `json:"last_updated_by"`
-	Name                      string                 `json:"name"`
-	Active                    *bool                  `json:"active"`
-	Configuration             map[string]interface{} `json:"configuration"`
-	Schedule                  *IntegrationSchedule   `json:"schedule"`
-	CollectedIntegrationData  map[string]interface{} `json:"collected_integration_data"`
-	LastRunStatus             *string                 `json:"last_run_status"`
-	LastCompletedRunEndTime    *string                `json:"last_completed_run_end_time"`
-	Health                    *string                 `json:"health"`
-	TriggerType               *string                `json:"trigger_type"`
-	TriggerSecret             *string                `json:"trigger_secret"`
-	TriggerURL                *string                `json:"trigger_url"`
-	InvalidationStrategy      *InvalidationStrategy  `json:"invalidation_strategy"`
-	LastTimeTriggered         *string                `json:"last_time_triggered"`
-	PendingCredentialsLookupKey *string              `json:"pending_credentials_lookup_key"`
+	ID                          int                    `json:"id"`
+	IntegrationType             string                 `json:"integration_type"`
+	AccountID                   int                    `json:"account_id"`
+	CreatedAt                   string                 `json:"created_at"`
+	CreatedBy                   string                 `json:"created_by"`
+	LastUpdatedAt               string                 `json:"last_updated_at"`
+	LastUpdatedBy               string                 `json:"last_updated_by"`
+	Name                        string                 `json:"name"`
+	Active                      *bool                  `json:"active"`
+	Configuration               map[string]interface{} `json:"configuration"`
+	Schedule                    *IntegrationSchedule   `json:"schedule"`
+	CollectedIntegrationData    map[string]interface{} `json:"collected_integration_data"`
+	LastRunStatus               *string                `json:"last_run_status"`
+	LastCompletedRunEndTime     *string                `json:"last_completed_run_end_time"`
+	Health                      *string                `json:"health"`
+	TriggerType                 *string                `json:"trigger_type"`
+	TriggerSecret               *string                `json:"trigger_secret"`
+	TriggerURL                  *string                `json:"trigger_url"`
+	InvalidationStrategy        *InvalidationStrategy  `json:"invalidation_strategy"`
+	LastTimeTriggered           *string                `json:"last_time_triggered"`
+	PendingCredentialsLookupKey *string                `json:"pending_credentials_lookup_key"`
 }
 
 // CreateIntegration creates a new integration
@@ -103,7 +103,7 @@ func (c *EunoClient) CreateIntegration(ctx context.Context, integration Integrat
 	defer c.releaseRateLimit()
 
 	url := fmt.Sprintf("%s/accounts/%d/integrations", c.serverURL, c.accountID)
-	
+
 	jsonData, err := json.Marshal(integration)
 	if err != nil {
 		return nil, fmt.Errorf("failed to marshal integration data: %w", err)
@@ -191,7 +191,7 @@ func (c *EunoClient) UpdateIntegration(ctx context.Context, integrationID int, i
 	defer c.releaseRateLimit()
 
 	url := fmt.Sprintf("%s/accounts/%d/integrations/%d", c.serverURL, c.accountID, integrationID)
-	
+
 	jsonData, err := json.Marshal(integration)
 	if err != nil {
 		return nil, fmt.Errorf("failed to marshal integration data: %w", err)

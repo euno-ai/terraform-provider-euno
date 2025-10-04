@@ -21,9 +21,9 @@ type HexIntegrationResourceModel struct {
 
 // HexConfigurationModel describes the Hex-specific configuration
 type HexConfigurationModel struct {
-	APIToken     types.String `tfsdk:"api_token"`
-	BaseURL      types.String `tfsdk:"base_url"`
-	WorkspaceID  types.String `tfsdk:"workspace_id"`
+	APIToken      types.String `tfsdk:"api_token"`
+	BaseURL       types.String `tfsdk:"base_url"`
+	WorkspaceID   types.String `tfsdk:"workspace_id"`
 	WorkspaceName types.String `tfsdk:"workspace_name"`
 }
 
@@ -104,11 +104,11 @@ func (r *HexIntegrationResource) Create(ctx context.Context, req resource.Create
 
 	// Convert Terraform data to API format
 	integration := IntegrationIn{
-		IntegrationType: "hex",
-		Name:            data.Name.ValueString(),
-		Active:          data.Active.ValueBool(),
-		Configuration:   configMap,
-		Schedule:        convertScheduleToAPI(data.Schedule),
+		IntegrationType:      "hex",
+		Name:                 data.Name.ValueString(),
+		Active:               data.Active.ValueBool(),
+		Configuration:        configMap,
+		Schedule:             convertScheduleToAPI(data.Schedule),
 		InvalidationStrategy: convertInvalidationStrategyToAPI(data.InvalidationStrategy),
 	}
 
@@ -237,11 +237,11 @@ func (r *HexIntegrationResource) Update(ctx context.Context, req resource.Update
 
 	// Convert Terraform data to API format
 	integration := IntegrationIn{
-		IntegrationType: "hex",
-		Name:            data.Name.ValueString(),
-		Active:          data.Active.ValueBool(),
-		Configuration:   configMap,
-		Schedule:        convertScheduleToAPI(data.Schedule),
+		IntegrationType:      "hex",
+		Name:                 data.Name.ValueString(),
+		Active:               data.Active.ValueBool(),
+		Configuration:        configMap,
+		Schedule:             convertScheduleToAPI(data.Schedule),
 		InvalidationStrategy: convertInvalidationStrategyToAPI(data.InvalidationStrategy),
 	}
 

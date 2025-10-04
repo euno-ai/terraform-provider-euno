@@ -21,33 +21,33 @@ type SnowflakeIntegrationResourceModel struct {
 
 // SnowflakeConfigurationModel describes the Snowflake-specific configuration
 type SnowflakeConfigurationModel struct {
-	Host                    types.String `tfsdk:"host"`
-	User                    types.String `tfsdk:"user"`
-	Password                types.String `tfsdk:"password"`
-	PrivateKey              types.String `tfsdk:"private_key"`
-	Role                    types.String `tfsdk:"role"`
-	Warehouse               types.String `tfsdk:"warehouse"`
-	Database                types.String `tfsdk:"database"`
-	TableToUseForQueryHistory types.String `tfsdk:"table_to_use_for_query_history"`
-	AdditionalWhereClauseForQueryHistoryQuery types.String `tfsdk:"additional_where_clause_for_query_history_query"`
-	OverridePlatformURI     types.String `tfsdk:"override_platform_uri"`
-	OverrideBaseURI         types.String `tfsdk:"override_base_uri"`
-	ExtractViews            types.Bool   `tfsdk:"extract_views"`
-	ExtractTables           types.Bool   `tfsdk:"extract_tables"`
-	ExtractTableauUsage     types.Bool   `tfsdk:"extract_tableau_usage"`
-	ExtractDailyUsage       types.Bool   `tfsdk:"extract_daily_usage"`
-	ExtractDailyDMLSummary  types.Bool   `tfsdk:"extract_daily_dml_summary"`
-	ExtractMaterializedViewsRefreshHistory types.Bool `tfsdk:"extract_materialized_views_refresh_history"`
-	ExtractHexUsage          types.Bool   `tfsdk:"extract_hex_usage"`
-	ExtractHexLineage        types.Bool   `tfsdk:"extract_hex_lineage"`
-	ExtractHexLineageLookbackDays types.Int64 `tfsdk:"extract_hex_lineage_lookback_days"`
-	CostPerCredit            types.Float64 `tfsdk:"cost_per_credit"`
-	StorageCostPerTB        types.Float64 `tfsdk:"storage_cost_per_tb"`
-	ObserveWarehouses        types.Bool   `tfsdk:"observe_warehouses"`
-	UseSnowflakeDatabase     types.Bool   `tfsdk:"use_snowflake_database"`
-	ExtractLineageFromQueryHistory types.Bool `tfsdk:"extract_lineage_from_query_history"`
-	LineageLookbackDays      types.Int64  `tfsdk:"lineage_lookback_days"`
-	ObserveInboundShares     types.Bool   `tfsdk:"observe_inbound_shares"`
+	Host                                      types.String  `tfsdk:"host"`
+	User                                      types.String  `tfsdk:"user"`
+	Password                                  types.String  `tfsdk:"password"`
+	PrivateKey                                types.String  `tfsdk:"private_key"`
+	Role                                      types.String  `tfsdk:"role"`
+	Warehouse                                 types.String  `tfsdk:"warehouse"`
+	Database                                  types.String  `tfsdk:"database"`
+	TableToUseForQueryHistory                 types.String  `tfsdk:"table_to_use_for_query_history"`
+	AdditionalWhereClauseForQueryHistoryQuery types.String  `tfsdk:"additional_where_clause_for_query_history_query"`
+	OverridePlatformURI                       types.String  `tfsdk:"override_platform_uri"`
+	OverrideBaseURI                           types.String  `tfsdk:"override_base_uri"`
+	ExtractViews                              types.Bool    `tfsdk:"extract_views"`
+	ExtractTables                             types.Bool    `tfsdk:"extract_tables"`
+	ExtractTableauUsage                       types.Bool    `tfsdk:"extract_tableau_usage"`
+	ExtractDailyUsage                         types.Bool    `tfsdk:"extract_daily_usage"`
+	ExtractDailyDMLSummary                    types.Bool    `tfsdk:"extract_daily_dml_summary"`
+	ExtractMaterializedViewsRefreshHistory    types.Bool    `tfsdk:"extract_materialized_views_refresh_history"`
+	ExtractHexUsage                           types.Bool    `tfsdk:"extract_hex_usage"`
+	ExtractHexLineage                         types.Bool    `tfsdk:"extract_hex_lineage"`
+	ExtractHexLineageLookbackDays             types.Int64   `tfsdk:"extract_hex_lineage_lookback_days"`
+	CostPerCredit                             types.Float64 `tfsdk:"cost_per_credit"`
+	StorageCostPerTB                          types.Float64 `tfsdk:"storage_cost_per_tb"`
+	ObserveWarehouses                         types.Bool    `tfsdk:"observe_warehouses"`
+	UseSnowflakeDatabase                      types.Bool    `tfsdk:"use_snowflake_database"`
+	ExtractLineageFromQueryHistory            types.Bool    `tfsdk:"extract_lineage_from_query_history"`
+	LineageLookbackDays                       types.Int64   `tfsdk:"lineage_lookback_days"`
+	ObserveInboundShares                      types.Bool    `tfsdk:"observe_inbound_shares"`
 }
 
 // SnowflakeIntegrationResource defines the Snowflake integration resource implementation.
@@ -304,11 +304,11 @@ func (r *SnowflakeIntegrationResource) Create(ctx context.Context, req resource.
 
 	// Convert Terraform data to API format
 	integration := IntegrationIn{
-		IntegrationType: "snowflake",
-		Name:            data.Name.ValueString(),
-		Active:          data.Active.ValueBool(),
-		Configuration:   configMap,
-		Schedule:        convertScheduleToAPI(data.Schedule),
+		IntegrationType:      "snowflake",
+		Name:                 data.Name.ValueString(),
+		Active:               data.Active.ValueBool(),
+		Configuration:        configMap,
+		Schedule:             convertScheduleToAPI(data.Schedule),
 		InvalidationStrategy: convertInvalidationStrategyToAPI(data.InvalidationStrategy),
 	}
 
@@ -444,11 +444,11 @@ func (r *SnowflakeIntegrationResource) Update(ctx context.Context, req resource.
 
 	// Convert Terraform data to API format
 	integration := IntegrationIn{
-		IntegrationType: "snowflake",
-		Name:            data.Name.ValueString(),
-		Active:          data.Active.ValueBool(),
-		Configuration:   configMap,
-		Schedule:        convertScheduleToAPI(data.Schedule),
+		IntegrationType:      "snowflake",
+		Name:                 data.Name.ValueString(),
+		Active:               data.Active.ValueBool(),
+		Configuration:        configMap,
+		Schedule:             convertScheduleToAPI(data.Schedule),
 		InvalidationStrategy: convertInvalidationStrategyToAPI(data.InvalidationStrategy),
 	}
 

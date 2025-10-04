@@ -16,29 +16,29 @@ var _ resource.ResourceWithImportState = &DbtCoreIntegrationResource{}
 
 // DbtCoreIntegrationResourceModel describes the DBT Core integration resource data model.
 type DbtCoreIntegrationResourceModel struct {
-	ID                        types.Int64  `tfsdk:"id"`
-	Name                      types.String `tfsdk:"name"`
-	Active                    types.Bool   `tfsdk:"active"`
-	TriggerSecret             types.String `tfsdk:"trigger_secret"`
-	TriggerURL                types.String `tfsdk:"trigger_url"`
-	InvalidationStrategy      *InvalidationStrategyModel `tfsdk:"invalidation_strategy"`
-	PendingCredentialsLookupKey types.String `tfsdk:"pending_credentials_lookup_key"`
-	LastUpdatedAt             types.String `tfsdk:"last_updated_at"`
-	CreatedAt                 types.String `tfsdk:"created_at"`
-	Configuration             DbtCoreConfigurationModel `tfsdk:"configuration"`
+	ID                          types.Int64                `tfsdk:"id"`
+	Name                        types.String               `tfsdk:"name"`
+	Active                      types.Bool                 `tfsdk:"active"`
+	TriggerSecret               types.String               `tfsdk:"trigger_secret"`
+	TriggerURL                  types.String               `tfsdk:"trigger_url"`
+	InvalidationStrategy        *InvalidationStrategyModel `tfsdk:"invalidation_strategy"`
+	PendingCredentialsLookupKey types.String               `tfsdk:"pending_credentials_lookup_key"`
+	LastUpdatedAt               types.String               `tfsdk:"last_updated_at"`
+	CreatedAt                   types.String               `tfsdk:"created_at"`
+	Configuration               DbtCoreConfigurationModel  `tfsdk:"configuration"`
 }
 
 // DbtCoreConfigurationModel describes the DBT Core-specific configuration
 type DbtCoreConfigurationModel struct {
-	SchemasAliases                                  types.Map    `tfsdk:"schemas_aliases"`
-	RepositoryURL                                   types.String `tfsdk:"repository_url"`
-	BuildTarget                                     types.String `tfsdk:"build_target"`
-	StageBuildTarget                                types.String `tfsdk:"stage_build_target"`
-	RepositoryBranch                                types.String `tfsdk:"repository_branch"`
-	DbtProjectRootDirectoryInRepository            types.String `tfsdk:"dbt_project_root_directory_in_repository"`
-	RepositoryRevision                              types.String `tfsdk:"repository_revision"`
-	AllowResourcesWithNoCatalogEntry               types.Bool  `tfsdk:"allow_resources_with_no_catalog_entry"`
-	OverrideURIPrefix                               types.String `tfsdk:"override_uri_prefix"`
+	SchemasAliases                      types.Map    `tfsdk:"schemas_aliases"`
+	RepositoryURL                       types.String `tfsdk:"repository_url"`
+	BuildTarget                         types.String `tfsdk:"build_target"`
+	StageBuildTarget                    types.String `tfsdk:"stage_build_target"`
+	RepositoryBranch                    types.String `tfsdk:"repository_branch"`
+	DbtProjectRootDirectoryInRepository types.String `tfsdk:"dbt_project_root_directory_in_repository"`
+	RepositoryRevision                  types.String `tfsdk:"repository_revision"`
+	AllowResourcesWithNoCatalogEntry    types.Bool   `tfsdk:"allow_resources_with_no_catalog_entry"`
+	OverrideURIPrefix                   types.String `tfsdk:"override_uri_prefix"`
 }
 
 // DbtCoreIntegrationResource defines the DBT Core integration resource implementation.
@@ -63,7 +63,7 @@ func (r *DbtCoreIntegrationResource) Schema(ctx context.Context, req resource.Sc
 
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "Euno DBT Core Integration resource (push integration)",
-		Attributes:           attrs,
+		Attributes:          attrs,
 		Blocks:              getCommonBlocksForPush(),
 	}
 
@@ -170,10 +170,10 @@ func (r *DbtCoreIntegrationResource) Create(ctx context.Context, req resource.Cr
 	// Convert Terraform data to API format
 	// Note: For push integrations, we don't include schedule
 	integration := IntegrationIn{
-		IntegrationType: "dbt_core",
-		Name:            data.Name.ValueString(),
-		Active:          data.Active.ValueBool(),
-		Configuration:   configMap,
+		IntegrationType:      "dbt_core",
+		Name:                 data.Name.ValueString(),
+		Active:               data.Active.ValueBool(),
+		Configuration:        configMap,
 		InvalidationStrategy: convertInvalidationStrategyToAPI(data.InvalidationStrategy),
 	}
 
@@ -344,10 +344,10 @@ func (r *DbtCoreIntegrationResource) Update(ctx context.Context, req resource.Up
 	// Convert Terraform data to API format
 	// Note: For push integrations, we don't include schedule
 	integration := IntegrationIn{
-		IntegrationType: "dbt_core",
-		Name:            data.Name.ValueString(),
-		Active:          data.Active.ValueBool(),
-		Configuration:   configMap,
+		IntegrationType:      "dbt_core",
+		Name:                 data.Name.ValueString(),
+		Active:               data.Active.ValueBool(),
+		Configuration:        configMap,
 		InvalidationStrategy: convertInvalidationStrategyToAPI(data.InvalidationStrategy),
 	}
 
