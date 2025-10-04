@@ -39,6 +39,13 @@ checksum:
   name_template: 'checksums.txt'
   algorithm: sha256
 
+# PGP signing configuration
+signs:
+  - artifacts: checksum
+    signature: "${artifact}.sig"
+    ids:
+      - "terraform-provider-euno"
+
 # Release configuration
 release:
   github:
@@ -73,17 +80,17 @@ snapshot:
 #       - --platform=linux/amd64
 #       - --platform=linux/arm64
 
-# Homebrew configuration (optional)
-brews:
-  - name: terraform-provider-euno
-    repository:
-      owner: euno-ai
-      name: homebrew-tap
-    description: "Terraform provider for Euno"
-    homepage: "https://github.com/euno-ai/terraform-provider-euno"
-    license: "MIT"
-    skip_upload: false
-    test: |
-      system "#{bin}/terraform-provider-euno version"
-    install: |
-      bin.install "terraform-provider-euno"
+# Homebrew configuration (optional) - disabled since homebrew-tap repo doesn't exist
+# brews:
+#   - name: terraform-provider-euno
+#     repository:
+#       owner: euno-ai
+#       name: homebrew-tap
+#     description: "Terraform provider for Euno"
+#     homepage: "https://github.com/euno-ai/terraform-provider-euno"
+#     license: "MIT"
+#     skip_upload: false
+#     test: |
+#       system "#{bin}/terraform-provider-euno version"
+#     install: |
+#       bin.install "terraform-provider-euno"
