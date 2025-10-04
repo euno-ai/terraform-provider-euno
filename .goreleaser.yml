@@ -1,0 +1,89 @@
+# This is an example .goreleaser.yml file with some sane defaults.
+# Make sure to check the documentation at https://goreleaser.com
+# before customizing.
+
+# Build configuration
+builds:
+  - id: "terraform-provider-euno"
+    binary: terraform-provider-euno
+    main: .
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
+    env:
+      - CGO_ENABLED=0
+
+# Archive configuration
+archives:
+  - id: "terraform-provider-euno"
+    name_template: "terraform-provider-euno_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE
+
+# Checksums configuration
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha256
+
+# Release configuration
+release:
+  github:
+    owner: euno-ai
+    name: terraform-provider-euno
+  draft: false
+  prerelease: auto
+  name_template: "Release {{ .Tag }}"
+  mode: replace
+
+# Changelog configuration
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+
+# Snapshots configuration
+snapshot:
+  name_template: "{{ .Tag }}-next"
+  version_template: "{{ .Tag }}-next"
+
+# Docker configuration (optional)
+dockers:
+  - image_templates:
+      - "euno-ai/terraform-provider-euno:{{ .Version }}"
+      - "euno-ai/terraform-provider-euno:latest"
+    dockerfile: Dockerfile
+    use: buildx
+    build_flag_templates:
+      - --platform=linux/amd64
+      - --platform=linux/arm64
+
+# Homebrew configuration (optional)
+brews:
+  - name: terraform-provider-euno
+    tap:
+      owner: euno-ai
+      name: homebrew-tap
+    folder: Formula
+    description: "Terraform provider for Euno"
+    homepage: "https://github.com/euno-ai/terraform-provider-euno"
+    license: "MIT"
+    skip_upload: false
+    test: |
+      system "#{bin}/terraform-provider-euno version"
+    install: |
+      bin.install "terraform-provider-euno"
