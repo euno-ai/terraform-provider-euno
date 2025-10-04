@@ -36,7 +36,7 @@ archives:
 
 # Checksums configuration
 checksum:
-  name_template: 'checksums.txt'
+  name_template: 'SHASUMS'
   algorithm: sha256
 
 # PGP signing configuration
