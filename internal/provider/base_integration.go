@@ -109,7 +109,6 @@ func getCommonBlocks() map[string]schema.Block {
 	}
 }
 
-
 // getCommonBlocksForPush returns the common blocks for push integration resources (no schedule)
 func getCommonBlocksForPush() map[string]schema.Block {
 	return map[string]schema.Block{
