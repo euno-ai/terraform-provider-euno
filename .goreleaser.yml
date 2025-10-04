@@ -2,6 +2,9 @@
 # Make sure to check the documentation at https://goreleaser.com
 # before customizing.
 
+# GoReleaser version
+version: 1
+
 # Build configuration
 builds:
   - id: "terraform-provider-euno"
@@ -59,26 +62,24 @@ changelog:
 # Snapshots configuration
 snapshot:
   name_template: "{{ .Tag }}-next"
-  version_template: "{{ .Tag }}-next"
 
-# Docker configuration (optional)
-dockers:
-  - image_templates:
-      - "euno-ai/terraform-provider-euno:{{ .Version }}"
-      - "euno-ai/terraform-provider-euno:latest"
-    dockerfile: Dockerfile
-    use: buildx
-    build_flag_templates:
-      - --platform=linux/amd64
-      - --platform=linux/arm64
+# Docker configuration (optional) - disabled since Dockerfile was removed
+# dockers:
+#   - image_templates:
+#       - "euno-ai/terraform-provider-euno:{{ .Version }}"
+#       - "euno-ai/terraform-provider-euno:latest"
+#     dockerfile: Dockerfile
+#     use: buildx
+#     build_flag_templates:
+#       - --platform=linux/amd64
+#       - --platform=linux/arm64
 
 # Homebrew configuration (optional)
 brews:
   - name: terraform-provider-euno
-    tap:
+    repository:
       owner: euno-ai
       name: homebrew-tap
-    folder: Formula
     description: "Terraform provider for Euno"
     homepage: "https://github.com/euno-ai/terraform-provider-euno"
     license: "MIT"
